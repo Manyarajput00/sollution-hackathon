@@ -1,193 +1,223 @@
-# GenAi-project 
+LegalAI — Demystifying Legal Documents
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LegalAI — Demystifying Legal Documents</title>
-  <style>
-    :root{
-      --bg:#fafafa; --card:#fff; --accent:#0b5cff; --muted:#555;
-      --maxw:900px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    body{background:var(--bg); margin:0; color:#111; -webkit-font-smoothing:antialiased;}
-    .wrap{max-width:var(--maxw); margin:36px auto; padding:28px;}
-    header{display:flex; gap:16px; align-items:center; margin-bottom:18px;}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#0b5cff,#2dd4bf);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;}
-    h1{margin:0;font-size:28px;}
-    p.lead{color:var(--muted); margin:6px 0 18px;}
-    .card{background:var(--card); border-radius:12px; padding:20px; box-shadow:0 6px 18px rgba(12,24,48,0.06); margin-bottom:14px;}
-    h2{font-size:18px; margin:0 0 8px;}
-    ul{margin:8px 0 0 20px; color:var(--muted);}
-    pre{background:#f3f4f6;padding:12px;border-radius:8px;overflow:auto;}
-    .two{display:grid;grid-template-columns:1fr 1fr; gap:12px;}
-    .muted{color:var(--muted); font-size:14px;}
-    footer{color:var(--muted); font-size:13px; text-align:center; margin-top:18px;}
-    a.cta{display:inline-block;padding:8px 12px;background:var(--accent);color:white;border-radius:8px;text-decoration:none;}
-    @media (max-width:720px){ .two{grid-template-columns:1fr} header{flex-direction:row} h1{font-size:20px} }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="logo">L</div>
-      <div>
-        <h1>LegalAI — Demystifying Legal Documents</h1>
-        <p class="lead">AI-powered tool to simplify legal documents, highlight risky clauses, and provide interactive Q&A. Built for the GenAI Exchange Hackathon.</p>
-      </div>
-    </header>
+AI-powered tool to simplify legal documents, highlight risky clauses, and provide interactive Q&A. Built for the GenAI Exchange Hackathon.
 
-    <section class="card">
-      <h2>📌 Overview</h2>
-      <p class="muted">LegalAI simplifies legal documents (rental agreements, loan contracts, Terms of Service, etc.) into plain language, highlights risky clauses with clause-level alerts, and offers an interactive chatbot for clarifications.</p>
-    </section>
 
-    <section class="card">
-      <h2>🚩 Problem Statement</h2>
-      <ul>
-        <li>Legal documents are often full of jargon and hard to understand.</li>
-        <li>Information asymmetry causes users to unknowingly accept unfair terms.</li>
-        <li>This leads to financial and legal risk for everyday users.</li>
-        <li>There is no affordable, AI-first solution targeted at non-expert users.</li>
-      </ul>
-    </section>
+---
 
-    <section class="card">
-      <h2>🎯 Objective</h2>
-      <ul>
-        <li>Simplify contracts into plain, user-friendly language.</li>
-        <li>Automatically highlight risky clauses and provide risk ratings.</li>
-        <li>Offer interactive Q&A via a chatbot to clarify user questions.</li>
-        <li>Provide a privacy-first, safe first point of contact before legal consultation.</li>
-      </ul>
-    </section>
+📌 Overview
 
-    <section class="card two">
-      <div>
-        <h2>💡 Unique Selling Points (USP)</h2>
-        <ul>
-          <li>Plain-language summaries of contracts.</li>
-          <li>Clause-level risk alerts and ratings.</li>
-          <li>AI chatbot for instant user support.</li>
-          <li>Visual contract navigator (future enhancement).</li>
-          <li>Privacy-first processing and secure storage.</li>
-        </ul>
-      </div>
-      <div>
-        <h2>🔑 Features</h2>
-        <ul>
-          <li>Upload a contract → receive an instant summary.</li>
-          <li>Clause-by-clause risk rating and highlights.</li>
-          <li>Interactive AI chatbot for follow-up questions.</li>
-          <li>Contract comparison (planned future feature).</li>
-          <li>Multilingual support for wider adoption.</li>
-        </ul>
-      </div>
-    </section>
+LegalAI simplifies legal documents (rental agreements, loan contracts, Terms of Service, etc.) into plain language, highlights risky clauses with clause-level alerts, and offers an interactive chatbot for clarifications.
 
-    <section class="card">
-      <h2>🔄 Process Flow</h2>
-      <ol class="muted">
-        <li>User uploads the legal document (PDF/DOC).</li>
-        <li>System extracts and segments text into clauses.</li>
-        <li>GenAI (Vertex AI / HF models) summarizes and classifies clauses.</li>
-        <li>Risky terms are detected and highlighted with ratings.</li>
-        <li>User explores the visual navigator and interacts with the chatbot.</li>
-      </ol>
-    </section>
 
-    <section class="card">
-      <h2>🏗️ Architecture (Low-Cost Setup)</h2>
-      <ul>
-        <li><strong>Frontend:</strong> Streamlit or Softr (free tiers)</li>
-        <li><strong>Backend:</strong> Firebase + Cloud Run (free tier)</li>
-        <li><strong>AI/ML:</strong> Vertex AI (free credits) / Hugging Face models</li>
-        <li><strong>Parsing:</strong> PyPDF2, LangChain</li>
-        <li><strong>Storage:</strong> Firestore (free tier)</li>
-        <li><strong>Security:</strong> GCP IAM & encryption</li>
-      </ul>
-    </section>
+---
 
-    <section class="card two">
-      <div>
-        <h2>🛠️ Technologies Used</h2>
-        <ul>
-          <li>GenAI: Vertex AI or Hugging Face</li>
-          <li>NLP: spaCy, LangChain</li>
-          <li>Frontend: Streamlit, Softr</li>
-          <li>Backend: Firebase, Cloud Run</li>
-          <li>Storage & Tools: Firestore, GitHub, Loom/OBS</li>
-        </ul>
-      </div>
-      <div>
-        <h2>💰 Cost & Feasibility</h2>
-        <ul>
-          <li>Google Cloud free tier ($300 credits)</li>
-          <li>Hugging Face free models and OSS libraries</li>
-          <li>Firebase / Vercel free hosting for MVP</li>
-          <li>Overall: low-cost / near-zero MVP</li>
-        </ul>
-      </div>
-    </section>
+🚩 Problem Statement
 
-    <section class="card">
-      <h2>📊 Evaluation Alignment</h2>
-      <ul>
-        <li><strong>Technical Merit (40%)</strong> — GenAI + NLP pipeline</li>
-        <li><strong>User Experience (10%)</strong> — clean, plain-language UI</li>
-        <li><strong>Alignment with Cause (15%)</strong> — legal accessibility</li>
-        <li><strong>Innovation (20%)</strong> — clause risk alerts + navigator</li>
-        <li><strong>Market Feasibility (15%)</strong> — SaaS / freemium</li>
-      </ul>
-    </section>
+Legal documents are often full of jargon and hard to understand.
 
-    <section class="card">
-      <h2>🚀 Future Scope</h2>
-      <ul>
-        <li>Contract comparison and side-by-side diffs</li>
-        <li>Rich visual dashboard for contract navigation</li>
-        <li>Local language support and regional legal templates</li>
-        <li>Lawyer referral / escalation workflow</li>
-      </ul>
-    </section>
+Information asymmetry causes users to unknowingly accept unfair terms.
 
-    <section class="card">
-      <h2>📌 How to Run (Prototype)</h2>
-      <p class="muted">Quick start for the hackathon prototype</p>
-      <pre>
+This leads to financial and legal risk for everyday users.
+
+There is no affordable, AI-first solution targeted at non-expert users.
+
+
+
+---
+
+🎯 Objective
+
+Simplify contracts into plain, user-friendly language.
+
+Automatically highlight risky clauses and provide risk ratings.
+
+Offer interactive Q&A via a chatbot to clarify user questions.
+
+Provide a privacy-first, safe-first point of contact before legal consultation.
+
+
+
+---
+
+💡 Unique Selling Points (USP)
+
+Plain-language summaries of contracts.
+
+Clause-level risk alerts and ratings.
+
+AI chatbot for instant user support.
+
+Visual contract navigator (future enhancement).
+
+Privacy-first processing and secure storage.
+
+
+
+---
+
+🔑 Features
+
+Upload a contract → receive an instant summary.
+
+Clause-by-clause risk rating and highlights.
+
+Interactive AI chatbot for follow-up questions.
+
+Contract comparison (planned future feature).
+
+Multilingual support for wider adoption.
+
+
+
+---
+
+🔄 Process Flow
+
+1. User uploads the legal document (PDF/DOC).
+
+
+2. System extracts and segments text into clauses.
+
+
+3. GenAI (Vertex AI / Hugging Face models) summarizes and classifies clauses.
+
+
+4. Risky terms are detected and highlighted with ratings.
+
+
+5. User explores the visual navigator and interacts with the chatbot.
+
+
+
+
+---
+
+🏗️ Architecture (Low-Cost Setup)
+
+Frontend: Streamlit or Softr (free tiers)
+
+Backend: Firebase + Cloud Run (free tier)
+
+AI/ML: Vertex AI (free credits) / Hugging Face models
+
+Parsing: PyPDF2, LangChain
+
+Storage: Firestore (free tier)
+
+Security: GCP IAM & encryption
+
+
+
+---
+
+🛠️ Technologies Used
+
+GenAI: Vertex AI or Hugging Face
+
+NLP: spaCy, LangChain
+
+Frontend: Streamlit, Softr
+
+Backend: Firebase, Cloud Run
+
+Storage & Tools: Firestore, GitHub, Loom/OBS
+
+
+
+---
+
+💰 Cost & Feasibility
+
+Google Cloud free tier ($300 credits)
+
+Hugging Face free models and OSS libraries
+
+Firebase / Vercel free hosting for MVP
+
+Overall: low-cost / near-zero MVP
+
+
+
+---
+
+📊 Evaluation Alignment
+
+Technical Merit (40%) — GenAI + NLP pipeline
+
+User Experience (10%) — clean, plain-language UI
+
+Alignment with Cause (15%) — legal accessibility
+
+Innovation (20%) — clause risk alerts + navigator
+
+Market Feasibility (15%) — SaaS / freemium
+
+
+
+---
+
+🚀 Future Scope
+
+Contract comparison and side-by-side diffs
+
+Rich visual dashboard for contract navigation
+
+Local language support and regional legal templates
+
+Lawyer referral / escalation workflow
+
+
+
+---
+
+📌 How to Run (Prototype)
+
+Quick start for the hackathon prototype:
+
 1. Clone repository
+
+
 2. pip install -r requirements.txt
+
+
 3. streamlit run app.py
+
+
 4. Upload a legal doc (PDF)
+
+
 5. Interact with chatbot and view summaries/risk alerts
-      </pre>
-    </section>
 
-    <section class="card two">
-      <div>
-        <h2>👥 Team</h2>
-        <ul>
-          <li>Team Name: Team_202_</li>
-          <li>Team Leader: Manya Rajput</li>
-          <li>Members: Manya Rajput , Manu Dev , Anjali , Muskan Katyal</li>
-        </ul>
-      </div>
-      <div>
-        <h2>📽️ Demo</h2>
-        <p class="muted">Record a short Loom/OBS video demo and attach the link here for judges.</p>
-      </div>
-    </section>
 
-    <section class="card">
-      <h2>📜 License</h2>
-      <p class="muted">This project is open-source under the MIT License.</p>
-    </section>
 
-    <footer>
-      <p class="muted">Prepared for GenAI Exchange Hackathon • LegalAI</p>
-    </footer>
-  </div>
-</body>
-</html>
+
+---
+
+👥 Team
+
+Team Name: Team_202_
+
+Team Leader: Manya Rajput 
+
+Members: Manya Rajput,Manu Dev,Anjali,    Muskan Katyal 
+
+
+
+---
+
+📽️ Demo
+
+Record a short Loom/OBS video demo and attach the link here for judges.
+
+
+---
+
+📜 License
+
+This project is open-source under the MIT License.
+
+
+---
+
+Prepared for GenAI Exchange Hackathon • LegalAI
