@@ -169,9 +169,9 @@
       <div>
         <h2>👥 Team</h2>
         <ul>
-          <li>Team Name: [Your Team Name]</li>
-          <li>Team Leader: [Your Name]</li>
-          <li>Members: [Add Members]</li>
+          <li>Team Name: Team_202_</li>
+          <li>Team Leader: Manya Rajput</li>
+          <li>Members: Manya Rajput , Manu Dev , Anjali , Muskan Katyal</li>
         </ul>
       </div>
       <div>
