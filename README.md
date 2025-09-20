@@ -1,3 +1,7 @@
+We are Team202, and we’re presenting our solution Generative AI for Demystifying Legal Documents. 
+
+Our goal is simple: make legal documents understandable, accessible, and safe for everyone.”
+
 LegalAI — Demystifying Legal Documents
 
 AI-powered tool to simplify legal documents, highlight risky clauses, and provide interactive Q&A. Built for the GenAI Exchange Hackathon.
