@@ -1,191 +1,680 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LegalAI — Demystifying Legal Documents</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Clarity — Plain-Language Legal Assistant (Demo)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#fafafa; --card:#fff; --accent:#0b5cff; --muted:#555;
-      --maxw:900px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --bg:#0b1221;
+      --card:#0f1830;
+      --muted:#94a3b8;
+      --primary:#54d6bb;
+      --accent:#7aa2ff;
+      --ring:rgba(84,214,187,.35);
+      --danger:#ef4444;
+      --warn:#f59e0b;
+      --safe:#22c55e;
     }
-    body{background:var(--bg); margin:0; color:#111; -webkit-font-smoothing:antialiased;}
-    .wrap{max-width:var(--maxw); margin:36px auto; padding:28px;}
-    header{display:flex; gap:16px; align-items:center; margin-bottom:18px;}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#0b5cff,#2dd4bf);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;}
-    h1{margin:0;font-size:28px;}
-    p.lead{color:var(--muted); margin:6px 0 18px;}
-    .card{background:var(--card); border-radius:12px; padding:20px; box-shadow:0 6px 18px rgba(12,24,48,0.06); margin-bottom:14px;}
-    h2{font-size:18px; margin:0 0 8px;}
-    ul{margin:8px 0 0 20px; color:var(--muted);}
-    pre{background:#f3f4f6;padding:12px;border-radius:8px;overflow:auto;}
-    .two{display:grid;grid-template-columns:1fr 1fr; gap:12px;}
-    .muted{color:var(--muted); font-size:14px;}
-    footer{color:var(--muted); font-size:13px; text-align:center; margin-top:18px;}
-    a.cta{display:inline-block;padding:8px 12px;background:var(--accent);color:white;border-radius:8px;text-decoration:none;}
-    @media (max-width:720px){ .two{grid-template-columns:1fr} header{flex-direction:row} h1{font-size:20px} }
+    html,body{height:100%}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:radial-gradient(1200px 800px at 80% -10%,rgba(122,162,255,.18),transparent), radial-gradient(900px 700px at -10% 20%,rgba(84,214,187,.15),transparent), var(--bg); color:#e5e9f4;}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px);}
+    .ring-focus:focus{outline:none; box-shadow:0 0 0 6px var(--ring)}
+    .badge{font-size:.75rem; padding:.25rem .5rem; border-radius:.5rem;}
+    .risk-red{background:rgba(239,68,68,.12); color:#fecaca; border:1px solid rgba(239,68,68,.35)}
+    .risk-amber{background:rgba(245,158,11,.12); color:#fde68a; border:1px solid rgba(245,158,11,.35)}
+    .risk-green{background:rgba(34,197,94,.12); color:#bbf7d0; border:1px solid rgba(34,197,94,.35)}
+    .pill{border-radius:999px}
+    .scroll-smooth{scroll-behavior:smooth}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
+    .section-title{letter-spacing:.3px}
+    .demo-chip{background:rgba(122,162,255,.15); color:#dbe7ff; border:1px dashed rgba(122,162,255,.45)}
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="logo">L</div>
-      <div>
-        <h1>LegalAI — Demystifying Legal Documents</h1>
-        <p class="lead">AI-powered tool to simplify legal documents, highlight risky clauses, and provide interactive Q&A. Built for the GenAI Exchange Hackathon.</p>
+<body class="scroll-smooth">
+  <header class="relative">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl grid place-content-center" style="background:linear-gradient(135deg,var(--accent),var(--primary)); box-shadow:0 10px 30px rgba(122,162,255,.25);">
+          <span class="font-extrabold text-white">LC</span>
+        </div>
+        <div>
+          <p class="text-xl font-extrabold">Legal Clarity</p>
+          <p class="text-xs text-slate-400 -mt-1">Plain-language legal understanding</p>
+        </div>
       </div>
-    </header>
-
-    <section class="card">
-      <h2>📌 Overview</h2>
-      <p class="muted">LegalAI simplifies legal documents (rental agreements, loan contracts, Terms of Service, etc.) into plain language, highlights risky clauses with clause-level alerts, and offers an interactive chatbot for clarifications.</p>
-    </section>
-
-    <section class="card">
-      <h2>🚩 Problem Statement</h2>
-      <ul>
-        <li>Legal documents are often full of jargon and hard to understand.</li>
-        <li>Information asymmetry causes users to unknowingly accept unfair terms.</li>
-        <li>This leads to financial and legal risk for everyday users.</li>
-        <li>There is no affordable, AI-first solution targeted at non-expert users.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>🎯 Objective</h2>
-      <ul>
-        <li>Simplify contracts into plain, user-friendly language.</li>
-        <li>Automatically highlight risky clauses and provide risk ratings.</li>
-        <li>Offer interactive Q&A via a chatbot to clarify user questions.</li>
-        <li>Provide a privacy-first, safe first point of contact before legal consultation.</li>
-      </ul>
-    </section>
-
-    <section class="card two">
-      <div>
-        <h2>💡 Unique Selling Points (USP)</h2>
-        <ul>
-          <li>Plain-language summaries of contracts.</li>
-          <li>Clause-level risk alerts and ratings.</li>
-          <li>AI chatbot for instant user support.</li>
-          <li>Visual contract navigator (future enhancement).</li>
-          <li>Privacy-first processing and secure storage.</li>
-        </ul>
+      <div class="hidden md:flex items-center gap-6 text-slate-300">
+        <a href="#problem" class="hover:text-white">Problem</a>
+        <a href="#solution" class="hover:text-white">Solution</a>
+        <a href="#demo" class="hover:text-white">Live Demo</a>
+        <a href="#process" class="hover:text-white">Process</a>
+        <a href="#architecture" class="hover:text-white">Architecture</a>
+        <a href="#evaluation" class="hover:text-white">Why Us</a>
       </div>
-      <div>
-        <h2>🔑 Features</h2>
-        <ul>
-          <li>Upload a contract → receive an instant summary.</li>
-          <li>Clause-by-clause risk rating and highlights.</li>
-          <li>Interactive AI chatbot for follow-up questions.</li>
-          <li>Contract comparison (planned future feature).</li>
-          <li>Multilingual support for wider adoption.</li>
-        </ul>
+      <div class="flex items-center gap-3">
+        <span class="badge demo-chip">Demo — local & private</span>
+        <a href="#demo" class="px-4 py-2 rounded-lg text-slate-900 font-semibold" style="background:linear-gradient(135deg,var(--primary),#72e0ae)">Try Sample</a>
       </div>
-    </section>
+    </nav>
+  </header>
 
-    <section class="card">
-      <h2>🔄 Process Flow</h2>
-      <ol class="muted">
-        <li>User uploads the legal document (PDF/DOC).</li>
-        <li>System extracts and segments text into clauses.</li>
-        <li>GenAI (Vertex AI / HF models) summarizes and classifies clauses.</li>
-        <li>Risky terms are detected and highlighted with ratings.</li>
-        <li>User explores the visual navigator and interacts with the chatbot.</li>
-      </ol>
-    </section>
-
-    <section class="card">
-      <h2>🏗️ Architecture (Low-Cost Setup)</h2>
-      <ul>
-        <li><strong>Frontend:</strong> Streamlit or Softr (free tiers)</li>
-        <li><strong>Backend:</strong> Firebase + Cloud Run (free tier)</li>
-        <li><strong>AI/ML:</strong> Vertex AI (free credits) / Hugging Face models</li>
-        <li><strong>Parsing:</strong> PyPDF2, LangChain</li>
-        <li><strong>Storage:</strong> Firestore (free tier)</li>
-        <li><strong>Security:</strong> GCP IAM & encryption</li>
-      </ul>
-    </section>
-
-    <section class="card two">
-      <div>
-        <h2>🛠️ Technologies Used</h2>
-        <ul>
-          <li>GenAI: Vertex AI or Hugging Face</li>
-          <li>NLP: spaCy, LangChain</li>
-          <li>Frontend: Streamlit, Softr</li>
-          <li>Backend: Firebase, Cloud Run</li>
-          <li>Storage & Tools: Firestore, GitHub, Loom/OBS</li>
-        </ul>
-      </div>
-      <div>
-        <h2>💰 Cost & Feasibility</h2>
-        <ul>
-          <li>Google Cloud free tier ($300 credits)</li>
-          <li>Hugging Face free models and OSS libraries</li>
-          <li>Firebase / Vercel free hosting for MVP</li>
-          <li>Overall: low-cost / near-zero MVP</li>
-        </ul>
+  <main>
+    <!-- Hero -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-14 md:py-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4 glass">
+            <span class="w-2 h-2 rounded-full" style="background:var(--primary)"></span>
+            <span class="text-xs text-slate-300">Affordable AI for legal clarity</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight section-title">Turn dense legalese into clear, safe decisions</h1>
+          <p class="mt-4 text-slate-300 text-lg">Upload a contract. Get a plain-language summary, traffic‑light risks per clause, and instant answers — all private in your browser.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#demo" class="px-5 py-3 rounded-xl font-semibold text-slate-900" style="background:linear-gradient(135deg,var(--accent),#9ac0ff)">Use the Demo</a>
+            <a href="#solution" class="px-5 py-3 rounded-xl font-semibold border border-slate-700 hover:border-slate-500 transition">Learn More</a>
+          </div>
+          <p class="mt-4 text-xs text-slate-400">Note: This is a local, in-browser demo for a hackathon. No files leave your device.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 md:p-8">
+          <div class="flex items-center gap-3">
+            <div class="badge pill risk-green">Plain summaries</div>
+            <div class="badge pill risk-amber">Clause risk alerts</div>
+            <div class="badge pill risk-red">Q&A guardrails</div>
+          </div>
+          <div class="mt-6 grid grid-cols-3 gap-4">
+            <div class="rounded-xl p-4 glass">
+              <p class="text-sm text-slate-400">Clause</p>
+              <p class="font-bold">Termination</p>
+              <span class="badge risk-red mt-2 inline-block">High Risk</span>
+              <p class="text-sm text-slate-300 mt-2">You can be removed without notice.</p>
+            </div>
+            <div class="rounded-xl p-4 glass">
+              <p class="text-sm text-slate-400">Clause</p>
+              <p class="font-bold">Fees</p>
+              <span class="badge risk-amber mt-2 inline-block">Medium Risk</span>
+              <p class="text-sm text-slate-300 mt-2">Late fees apply after 3 days.</p>
+            </div>
+            <div class="rounded-xl p-4 glass">
+              <p class="text-sm text-slate-400">Clause</p>
+              <p class="font-bold">Privacy</p>
+              <span class="badge risk-green mt-2 inline-block">Low Risk</span>
+              <p class="text-sm text-slate-300 mt-2">Your data is not sold.</p>
+            </div>
+          </div>
+          <div class="divider my-6"></div>
+          <div class="flex items-center gap-3 text-slate-300 text-sm">
+            <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--safe)"></span> Safe</span>
+            <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--warn)"></span> Caution</span>
+            <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--danger)"></span> Risky</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="card">
-      <h2>📊 Evaluation Alignment</h2>
-      <ul>
-        <li><strong>Technical Merit (40%)</strong> — GenAI + NLP pipeline</li>
-        <li><strong>User Experience (10%)</strong> — clean, plain-language UI</li>
-        <li><strong>Alignment with Cause (15%)</strong> — legal accessibility</li>
-        <li><strong>Innovation (20%)</strong> — clause risk alerts + navigator</li>
-        <li><strong>Market Feasibility (15%)</strong> — SaaS / freemium</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>🚀 Future Scope</h2>
-      <ul>
-        <li>Contract comparison and side-by-side diffs</li>
-        <li>Rich visual dashboard for contract navigation</li>
-        <li>Local language support and regional legal templates</li>
-        <li>Lawyer referral / escalation workflow</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>📌 How to Run (Prototype)</h2>
-      <p class="muted">Quick start for the hackathon prototype</p>
-      <pre>
-1. Clone repository
-2. pip install -r requirements.txt
-3. streamlit run app.py
-4. Upload a legal doc (PDF)
-5. Interact with chatbot and view summaries/risk alerts
-      </pre>
-    </section>
-
-    <section class="card two">
-      <div>
-        <h2>👥 Team</h2>
-        <ul>
-          <li>Team Name: [Your Team Name]</li>
-          <li>Team Leader: [Your Name]</li>
-          <li>Members: [Add Members]</li>
-        </ul>
-      </div>
-      <div>
-        <h2>📽️ Demo</h2>
-        <p class="muted">Record a short Loom/OBS video demo and attach the link here for judges.</p>
+    <!-- Problem & Objective -->
+    <section id="problem" class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass rounded-2xl p-6 md:p-8">
+          <h2 class="text-2xl font-bold">Problem</h2>
+          <p class="text-slate-300 mt-3">Legal documents like rental agreements, loan contracts, and terms of service are full of jargon and complex clauses. Most people sign without understanding, creating information asymmetry and unfair risks. There’s no affordable AI solution that decodes this for everyday users or small businesses.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 md:p-8">
+          <h2 class="text-2xl font-bold">Our Objective</h2>
+          <p class="text-slate-300 mt-3">Translate complex legal text into plain language, highlight risky clauses with a traffic-light system, and provide instant answers to user questions — acting as a private, safe first point of contact for legal clarity.</p>
+        </div>
       </div>
     </section>
 
-    <section class="card">
-      <h2>📜 License</h2>
-      <p class="muted">This project is open-source under the MIT License.</p>
+    <!-- USP -->
+    <section id="solution" class="max-w-7xl mx-auto px-6 lg:px-8 py-6">
+      <div class="glass rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl font-bold section-title">What makes us different</h2>
+        <div class="grid md:grid-cols-4 gap-6 mt-6">
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Plain-language summaries</p>
+            <p class="text-slate-300 text-sm mt-2">Clear, human-friendly explanations. Not generic dumps.</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Clause-level risk alerts</p>
+            <p class="text-slate-300 text-sm mt-2">Traffic light signals per clause.</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Interactive Q&amp;A</p>
+            <p class="text-slate-300 text-sm mt-2">Ask “What does this mean for me?” and get instant context.</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Strong privacy</p>
+            <p class="text-slate-300 text-sm mt-2">Documents stay on-device, encrypted in production.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p class="muted">Prepared for GenAI Exchange Hackathon • LegalAI</p>
+    <!-- Features -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-6">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="rounded-2xl p-6 glass">
+          <p class="text-sm text-slate-400">Feature</p>
+          <h3 class="text-xl font-bold">Instant summary</h3>
+          <p class="text-slate-300 mt-2">Upload and get a simplified summary immediately.</p>
+        </div>
+        <div class="rounded-2xl p-6 glass">
+          <p class="text-sm text-slate-400">Feature</p>
+          <h3 class="text-xl font-bold">Risk by clause</h3>
+          <p class="text-slate-300 mt-2">Each clause labeled as Low, Medium, or High.</p>
+        </div>
+        <div class="rounded-2xl p-6 glass">
+          <p class="text-sm text-slate-400">Feature</p>
+          <h3 class="text-xl font-bold">Chatbot Q&amp;A</h3>
+          <p class="text-slate-300 mt-2">Ask questions and get plain answers.</p>
+        </div>
+      </div>
+      <div class="text-slate-400 text-sm mt-3">Future: compare contracts and multilingual support.</div>
+    </section>
+
+    <!-- Live Demo -->
+    <section id="demo" class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-extrabold">Live Demo (Local & Private)</h2>
+        <div class="flex items-center gap-3">
+          <label class="text-sm text-slate-300">Output language</label>
+          <select id="langSelect" class="ring-focus glass rounded-lg px-3 py-2 text-slate-200">
+            <option value="en">English</option>
+            <option value="es">Español (demo)</option>
+            <option value="hi">हिंदी (demo)</option>
+            <option value="pt">Português (demo)</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Left: Input -->
+        <div class="glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <p class="font-semibold">Your document</p>
+            <span class="badge demo-chip">Demo — no upload to server</span>
+          </div>
+          <div class="mt-4 space-y-3">
+            <div class="flex gap-2">
+              <input id="fileInput" type="file" accept=".txt" class="hidden">
+              <button id="chooseFileBtn" class="px-4 py-2 rounded-lg font-semibold glass hover:brightness-110">Upload .txt</button>
+              <button id="pasteBtn" class="px-4 py-2 rounded-lg font-semibold glass hover:brightness-110">Paste text</button>
+              <button id="sampleBtn" class="px-4 py-2 rounded-lg font-semibold" style="background:linear-gradient(135deg,var(--primary),#72e0ae); color:#0b1221">Try sample</button>
+            </div>
+            <textarea id="pasteArea" placeholder="Paste contract text here..." class="w-full h-32 hidden p-3 rounded-lg glass ring-focus text-slate-200"></textarea>
+            <div class="text-xs text-slate-400">PDF upload is not supported in this demo due to environment limits. Use .txt or paste text.</div>
+            <div class="flex gap-2 pt-2">
+              <button id="analyzeBtn" class="px-4 py-2 rounded-lg font-semibold bg-white/10 hover:bg-white/20 border border-white/10">Analyze</button>
+              <button id="clearBtn" class="px-4 py-2 rounded-lg font-semibold border border-slate-700 hover:border-slate-500">Clear</button>
+            </div>
+          </div>
+          <div id="status" class="text-sm text-slate-300 mt-4 hidden"></div>
+        </div>
+
+        <!-- Middle: Summary -->
+        <div class="glass rounded-2xl p-5">
+          <p class="font-semibold">Plain-language Summary</p>
+          <div id="summaryBox" class="mt-3 text-slate-200 text-sm leading-relaxed space-y-2">
+            <p class="text-slate-400">Upload or paste text, then click Analyze to see a simple summary here.</p>
+          </div>
+        </div>
+
+        <!-- Right: Risks -->
+        <div class="glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <p class="font-semibold">Clause Risks</p>
+            <div class="flex items-center gap-2 text-xs text-slate-400">
+              <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:var(--danger)"></span>High</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:var(--warn)"></span>Med</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:var(--safe)"></span>Low</span>
+            </div>
+          </div>
+          <div id="riskList" class="mt-3 space-y-3">
+            <div class="text-slate-400 text-sm">Clause-by-clause risk will appear here.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chatbot -->
+      <div class="grid lg:grid-cols-3 gap-6 mt-6">
+        <div class="lg:col-span-2 glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <p class="font-semibold">Ask the document</p>
+            <span class="badge demo-chip">Rule-based demo</span>
+          </div>
+          <div id="chatArea" class="mt-3 h-64 overflow-y-auto space-y-3 pr-1">
+            <div class="text-slate-400 text-sm">After analysis, ask questions like “What does the termination clause mean for me?”</div>
+          </div>
+          <form id="chatForm" class="mt-3 flex gap-2">
+            <input id="chatInput" class="flex-1 rounded-lg glass px-3 py-2 ring-focus" placeholder="Type your question..." />
+            <button class="px-4 py-2 rounded-lg font-semibold" style="background:linear-gradient(135deg,var(--accent),#9ac0ff); color:#0b1221">Send</button>
+          </form>
+          <div class="text-xs text-slate-400 mt-2">In production, this connects to Vertex AI with privacy guardrails.</div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <p class="font-semibold">Compare Contracts (Preview)</p>
+          <p class="text-slate-400 text-sm mt-2">Envisioned feature — paste a second document to see key differences highlighted.</p>
+          <textarea id="compareArea" placeholder="Paste a second contract (Preview)" class="w-full h-28 mt-3 p-3 rounded-lg glass text-slate-200"></textarea>
+          <button id="compareBtn" class="mt-3 px-4 py-2 rounded-lg font-semibold border border-slate-700 hover:border-slate-500 w-full">Show Key Differences</button>
+          <div id="compareOut" class="text-sm text-slate-300 mt-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="glass rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl font-bold">Process Flow</h2>
+        <div class="grid md:grid-cols-5 gap-4 mt-6">
+          <div class="rounded-xl p-4 glass">
+            <p class="font-semibold">1. Upload</p>
+            <p class="text-slate-300 text-sm mt-1">User provides a document.</p>
+          </div>
+          <div class="rounded-xl p-4 glass">
+            <p class="font-semibold">2. Extract</p>
+            <p class="text-slate-300 text-sm mt-1">Text is segmented into clauses.</p>
+          </div>
+          <div class="rounded-xl p-4 glass">
+            <p class="font-semibold">3. Summarize</p>
+            <p class="text-slate-300 text-sm mt-1">Plain-language summaries with AI.</p>
+          </div>
+          <div class="rounded-xl p-4 glass">
+            <p class="font-semibold">4. Flag Risks</p>
+            <p class="text-slate-300 text-sm mt-1">Risk terms trigger traffic lights.</p>
+          </div>
+          <div class="rounded-xl p-4 glass">
+            <p class="font-semibold">5. Clarify</p>
+            <p class="text-slate-300 text-sm mt-1">Chatbot answers follow‑ups.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Tools -->
+    <section id="architecture" class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass rounded-2xl p-6 md:p-8">
+          <h2 class="text-2xl font-bold">Low-Cost Architecture</h2>
+          <ul class="list-disc list-inside text-slate-300 mt-3 space-y-1 text-sm">
+            <li>Frontend with Streamlit/Softr (prototype), or lightweight web app (this demo).</li>
+            <li>Backend using Firebase + Cloud Run free tiers.</li>
+            <li>AI via Vertex AI free credits; Hugging Face fallback.</li>
+            <li>Parsing via PyPDF2 + spaCy in backend.</li>
+          </ul>
+          <p class="text-xs text-slate-400 mt-3">This page is a local front-end demo; production adds secure APIs and encryption.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 md:p-8">
+          <h2 class="text-2xl font-bold">Tools & Cost Saving</h2>
+          <ul class="list-disc list-inside text-slate-300 mt-3 space-y-1 text-sm">
+            <li>GCP $300 credits</li>
+            <li>Open-source NLP fallbacks</li>
+            <li>Free hosting: Firebase / Vercel / Streamlit Cloud</li>
+            <li>Loom/OBS for demos, GitHub for collaboration</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluation -->
+    <section id="evaluation" class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="glass rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl font-bold">Why this wins</h2>
+        <div class="grid md:grid-cols-4 gap-6 mt-6">
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Technical merit</p>
+            <p class="text-slate-300 text-sm mt-2">GenAI + NLP risk detection</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">User experience</p>
+            <p class="text-slate-300 text-sm mt-2">Simple, plain interface</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Access & equity</p>
+            <p class="text-slate-300 text-sm mt-2">Democratizes legal understanding</p>
+          </div>
+          <div class="rounded-xl p-5 glass">
+            <p class="font-semibold">Market fit</p>
+            <p class="text-slate-300 text-sm mt-2">SaaS for SMEs; freemium for individuals</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="max-w-7xl mx-auto px-6 lg:px-8 py-10">
+      <div class="divider mb-6"></div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-slate-400 text-sm">© <span id="year"></span> Legal Clarity — Hackathon Demo</p>
+        <div class="text-xs text-slate-500">Privacy note: This demo runs fully in your browser. No data leaves your device.</div>
+      </div>
     </footer>
-  </div>
-</body>
+  </main>
+
+  <script>
+    // Utility: basic i18n demo (very small dictionary for summaries UI)
+    const i18n = {
+      en: { summary: "Summary", clause: "Clause", risk: "Risk", high: "High Risk", medium: "Medium Risk", low: "Low Risk" },
+      es: { summary: "Resumen", clause: "Cláusula", risk: "Riesgo", high: "Riesgo alto", medium: "Riesgo medio", low: "Riesgo bajo" },
+      hi: { summary: "सारांश", clause: "धारा", risk: "जोखिम", high: "उच्च जोखिम", medium: "मध्यम जोखिम", low: "कम जोखिम" },
+      pt: { summary: "Resumo", clause: "Cláusula", risk: "Risco", high: "Alto risco", medium: "Risco médio", low: "Baixo risco" },
+    };
+    let currentLang = 'en';
+
+    // Sample contract text (short for demo)
+    const SAMPLE_TEXT = `1. Termination: The landlord may terminate this agreement at any time with 7 days' notice for any breach. 
+2. Late Fees: A late fee of 5% will be charged on payments more than 3 days late. 
+3. Arbitration: Disputes must be resolved by binding arbitration; parties waive the right to a court trial or class action. 
+4. Data Use: The provider may share anonymized usage data to improve services. 
+5. Auto-Renewal: This contract renews automatically each year unless canceled 30 days in advance. 
+6. Liability: The provider is not liable for indirect or consequential damages.`;
+
+    // Heuristic "plain language" simplifier
+    function simplifySentence(s){
+      let t = s
+        .replace(/\bhereby\b/gi, '')
+        .replace(/\bthereof\b/gi, '')
+        .replace(/\bpursuant to\b/gi, 'under')
+        .replace(/\bshall\b/gi, 'will')
+        .replace(/\bnotwithstanding\b/gi, 'despite')
+        .replace(/\bterminate\b/gi, 'end')
+        .replace(/\bliability\b/gi, 'responsibility')
+        .replace(/\bindemnif(y|ies|ication)\b/gi, 'cover losses')
+        .replace(/\barbitration\b/gi, 'private dispute process')
+        .replace(/\bdispute(s)?\b/gi, 'disagreement')
+        .replace(/\bconsequential damages\b/gi, 'indirect losses')
+        .replace(/\bauto-?renew(al)?\b/gi, 'auto renew');
+      // Shorten
+      if(t.length > 200){
+        t = t.split(/[.;]/).slice(0,2).join('. ').trim();
+      }
+      return t.trim();
+    }
+
+    // Risk detection keywords
+    const RISK_RULES = {
+      high: [/terminate|evict|binding arbitration|waive|class action|penalty|consent to share.*data|without notice|liability.*unlimited/gi],
+      medium: [/late fee|auto renew|auto-?renew|30 days|interest|assignment|jurisdiction|governing law/gi],
+      low: [/anonymized|improve services|notice|privacy/gi]
+    };
+
+    function assessRisk(text){
+      const t = text.toLowerCase();
+      let score = 0, tags = [];
+      if(RISK_RULES.high.some(r=>r.test(t))){ score += 2; tags.push('High triggers'); }
+      if(RISK_RULES.medium.some(r=>r.test(t))){ score += 1; tags.push('Medium triggers'); }
+      if(RISK_RULES.low.some(r=>r.test(t))){ tags.push('Low triggers'); }
+      let level = 'low';
+      if(score >= 2) level = 'high';
+      else if(score === 1) level = 'medium';
+      return { level, tags };
+    }
+
+    // Segment into clauses
+    function segmentClauses(text){
+      // Split by numbered lines or sentence breaks; keep meaningful chunks
+      const lines = text.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+      let raw = [];
+      lines.forEach(line=>{
+        const parts = line.split(/(?<=\.)\s+(?=[A-Z0-9])/g); // split by sentences
+        parts.forEach(p=>{ if(p.trim()) raw.push(p.trim()); });
+      });
+      // Merge short lines into previous for better clauses
+      const clauses = [];
+      raw.forEach((r,i)=>{
+        if(clauses.length && r.length < 60){
+          clauses[clauses.length-1] += ' ' + r;
+        }else{
+          clauses.push(r);
+        }
+      });
+      return clauses.map((c,idx)=>({ id: 'cl-'+(idx+1), text: c }));
+    }
+
+    // Create summaries per clause
+    function summarizeClauses(clauses){
+      return clauses.map(c=>{
+        const plain = simplifySentence(c.text);
+        const risk = assessRisk(c.text);
+        let takeaway = '';
+        if(risk.level==='high') takeaway = 'Be careful — this can strongly limit your options.';
+        else if(risk.level==='medium') takeaway = 'Notice period or fees may apply — review details.';
+        else takeaway = 'This looks standard and low risk.';
+        return { ...c, summary: plain, risk: risk.level, reasons: risk.tags, takeaway };
+      });
+    }
+
+    // Overall summary
+    function overallSummary(items){
+      const counts = { high:0, medium:0, low:0 };
+      items.forEach(i=>counts[i.risk]++);
+      return `This document has ${counts.high} high‑risk, ${counts.medium} medium‑risk, and ${counts.low} low‑risk clauses. Review high‑risk parts carefully before signing.`;
+    }
+
+    // Very simple Q&A over clauses
+    function answerQuestion(q, items){
+      if(!items.length) return "Please analyze a document first.";
+      const t = q.toLowerCase();
+      // Find best clause by keyword overlap
+      const weights = ['terminate','end','fee','late','arbitration','court','class','data','privacy','renew','liability','damage','notice','cancel'].map(k=>({k, hit: t.includes(k)}));
+      let best = null, bestScore = -1;
+      items.forEach(it=>{
+        let s = 0;
+        weights.forEach(w=>{
+          if(w.hit && it.text.toLowerCase().includes(w.k)) s += 2;
+          if(it.summary.toLowerCase().includes(w.k)) s += 1;
+        });
+        // small boost for riskier clauses
+        if(it.risk==='high') s += 1;
+        if(s > bestScore){ bestScore = s; best = it; }
+      });
+      if(!best) best = items[0];
+      let riskLabel = best.risk==='high' ? i18n[currentLang].high : best.risk==='medium' ? i18n[currentLang].medium : i18n[currentLang].low;
+      return `${i18n[currentLang].clause} ${best.id.split('-')[1]} (${riskLabel}): ${best.summary} ${best.takeaway}`;
+    }
+
+    // Tiny "translation" demo (does not call network)
+    function translateIfDemo(text){
+      if(currentLang==='en') return text;
+      const maps = {
+        es: [['Summary','Resumen'],['High Risk','Riesgo alto'],['Medium Risk','Riesgo medio'],['Low Risk','Riesgo bajo'],['Be careful','Tenga cuidado'],['Review','Revise'],['standard','estándar'],['document','documento'],['fee','tarifa'],['notice','aviso']],
+        hi: [['Summary','सारांश'],['High Risk','उच्च जोखिम'],['Medium Risk','मध्यम जोखिम'],['Low Risk','कम जोखिम'],['Be careful','सावधान रहें'],['Review','जाँचें'],['standard','मानक'],['document','दस्तावेज़'],['fee','शुल्क'],['notice','सूचना']],
+        pt: [['Summary','Resumo'],['High Risk','Alto risco'],['Medium Risk','Risco médio'],['Low Risk','Baixo risco'],['Be careful','Cuidado'],['Review','Revise'],['standard','padrão'],['document','documento'],['fee','taxa'],['notice','aviso']],
+      };
+      let out = text;
+      (maps[currentLang]||[]).forEach(([a,b])=>{
+        out = out.replace(new RegExp(a,'gi'), m=> b);
+      });
+      return out;
+    }
+
+    // UI bindings
+    const els = {
+      year: document.getElementById('year'),
+      fileInput: document.getElementById('fileInput'),
+      chooseFileBtn: document.getElementById('chooseFileBtn'),
+      pasteBtn: document.getElementById('pasteBtn'),
+      pasteArea: document.getElementById('pasteArea'),
+      analyzeBtn: document.getElementById('analyzeBtn'),
+      clearBtn: document.getElementById('clearBtn'),
+      sampleBtn: document.getElementById('sampleBtn'),
+      status: document.getElementById('status'),
+      summaryBox: document.getElementById('summaryBox'),
+      riskList: document.getElementById('riskList'),
+      chatArea: document.getElementById('chatArea'),
+      chatForm: document.getElementById('chatForm'),
+      chatInput: document.getElementById('chatInput'),
+      compareArea: document.getElementById('compareArea'),
+      compareBtn: document.getElementById('compareBtn'),
+      compareOut: document.getElementById('compareOut'),
+      langSelect: document.getElementById('langSelect'),
+    };
+    els.year.textContent = new Date().getFullYear();
+
+    let state = {
+      rawText: '',
+      items: [],
+    };
+
+    function setStatus(msg){
+      if(!msg){ els.status.classList.add('hidden'); els.status.textContent=''; return; }
+      els.status.textContent = msg;
+      els.status.classList.remove('hidden');
+    }
+
+    function renderSummary(items){
+      if(!items.length){
+        els.summaryBox.innerHTML = '<p class="text-slate-400">Upload or paste text, then click Analyze to see a simple summary here.</p>';
+        return;
+      }
+      const top = translateIfDemo(overallSummary(items));
+      const bullets = items.slice(0,5).map(it=> `<li class="mb-2"><span class="text-slate-400">${i18n[currentLang].clause} ${it.id.split('-')[1]}:</span> ${translateIfDemo(it.summary)}</li>`).join('');
+      els.summaryBox.innerHTML = `
+        <p>${top}</p>
+        <ul class="mt-3 list-disc list-inside">${bullets}</ul>
+      `;
+    }
+
+    function riskBadge(level){
+      if(level==='high') return '<span class="badge risk-red">High</span>';
+      if(level==='medium') return '<span class="badge risk-amber">Medium</span>';
+      return '<span class="badge risk-green">Low</span>';
+    }
+
+    function riskColor(level){
+      if(level==='high') return 'risk-red';
+      if(level==='medium') return 'risk-amber';
+      return 'risk-green';
+    }
+
+    function renderRisks(items){
+      if(!items.length){
+        els.riskList.innerHTML = '<div class="text-slate-400 text-sm">Clause-by-clause risk will appear here.</div>';
+        return;
+      }
+      els.riskList.innerHTML = items.map(it=>{
+        return `
+          <div class="rounded-xl p-4 ${riskColor(it.risk)}">
+            <div class="flex items-center justify-between gap-2">
+              <p class="font-semibold">${i18n[currentLang].clause} ${it.id.split('-')[1]}</p>
+              <div>${riskBadge(it.risk)}</div>
+            </div>
+            <p class="text-sm mt-2">${translateIfDemo(it.summary)}</p>
+            <p class="text-xs opacity-80 mt-1">${translateIfDemo(it.takeaway)}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addChat(role, text){
+      const wrap = document.createElement('div');
+      wrap.className = 'flex ' + (role==='user' ? 'justify-end' : 'justify-start');
+      const bubble = document.createElement('div');
+      bubble.className = 'max-w-[80%] px-3 py-2 rounded-xl';
+      if(role==='user'){ bubble.classList.add('glass'); }
+      else { bubble.style.background = 'rgba(122,162,255,.12)'; bubble.style.border = '1px solid rgba(122,162,255,.3)'; }
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      els.chatArea.appendChild(wrap);
+      els.chatArea.scrollTop = els.chatArea.scrollHeight;
+    }
+
+    function analyze(text){
+      const clauses = segmentClauses(text);
+      const items = summarizeClauses(clauses);
+      state.items = items;
+      renderSummary(items);
+      renderRisks(items);
+      setStatus('Analysis complete.');
+    }
+
+    // Handlers
+    els.chooseFileBtn.addEventListener('click', ()=> els.fileInput.click());
+    els.fileInput.addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file){ return; }
+      if(file.type !== 'text/plain'){ setStatus('Please upload a .txt file for this demo.'); return; }
+      const reader = new FileReader();
+      reader.onload = () => {
+        state.rawText = String(reader.result || '');
+        setStatus('File loaded. Click Analyze.');
+      };
+      reader.readAsText(file);
+    });
+
+    els.pasteBtn.addEventListener('click', ()=>{
+      els.pasteArea.classList.toggle('hidden');
+      if(!els.pasteArea.classList.contains('hidden')){
+        els.pasteArea.focus();
+      }
+    });
+
+    els.sampleBtn.addEventListener('click', ()=>{
+      state.rawText = SAMPLE_TEXT;
+      els.pasteArea.value = SAMPLE_TEXT;
+      els.pasteArea.classList.remove('hidden');
+      setStatus('Sample loaded. Click Analyze.');
+    });
+
+    els.analyzeBtn.addEventListener('click', ()=>{
+      const text = (els.pasteArea.value || state.rawText || '').trim();
+      if(!text){ setStatus('Please paste text or upload a .txt file first.'); return; }
+      setStatus('Analyzing...');
+      // Simulate quick processing
+      setTimeout(()=> analyze(text), 300);
+    });
+
+    els.clearBtn.addEventListener('click', ()=>{
+      state = { rawText:'', items:[] };
+      els.pasteArea.value = '';
+      els.fileInput.value = '';
+      setStatus('');
+      renderSummary([]);
+      renderRisks([]);
+      els.chatArea.innerHTML = '<div class="text-slate-400 text-sm">After analysis, ask questions like “What does the termination clause mean for me?”</div>';
+      els.compareArea.value = '';
+      els.compareOut.textContent = '';
+    });
+
+    els.chatForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const q = els.chatInput.value.trim();
+      if(!q) return;
+      addChat('user', q);
+      els.chatInput.value = '';
+      setTimeout(()=>{
+        const a = answerQuestion(q, state.items);
+        addChat('bot', a);
+      }, 200);
+    });
+
+    els.compareBtn.addEventListener('click', ()=>{
+      const a = (els.pasteArea.value || state.rawText || '').trim();
+      const b = els.compareArea.value.trim();
+      if(!a || !b){ els.compareOut.textContent = 'Paste both texts to preview differences.'; return; }
+      // Very basic difference: count risk terms occurrence
+      const countTerms = (t)=>({
+        termination:(t.match(/terminate|end|evict/gi)||[]).length,
+        fees:(t.match(/fee|late/gi)||[]).length,
+        arbitration:(t.match(/arbitration|class action/gi)||[]).length,
+        data:(t.match(/data|privacy/gi)||[]).length,
+        renew:(t.match(/auto-?renew|renew/gi)||[]).length,
+        liability:(t.match(/liability|damage/gi)||[]).length
+      });
+      const c1 = countTerms(a), c2 = countTerms(b);
+      const keys = Object.keys(c1);
+      const diffs = keys.map(k=>{
+        const d = c2[k]-c1[k];
+        if(d===0) return `<li>${k}: no notable change</li>`;
+        return `<li>${k}: ${d>0? 'more mentions (+'+d+')' : 'fewer mentions ('+d+')'}</li>`;
+      }).join('');
+      els.compareOut.innerHTML = `<p class="text-sm">Quick difference preview:</p><ul class="list-disc list-inside text-sm mt-1">${diffs}</ul>`;
+    });
+
+    els.langSelect.addEventListener('change', ()=>{
+      currentLang = els.langSelect.value;
+      renderSummary(state.items);
+      renderRisks(state.items);
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'982906ba028c0f06',t:'MTc1ODQ1MjA4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
